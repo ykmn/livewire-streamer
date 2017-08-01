@@ -1,6 +1,6 @@
 livewire-streamer
 =================
-This is a simple Ubuntu upstart script that runs some utilities to pipe audio from a Livewire network 
+This is a simple set of Ubuntu scripts that runs some utilities to pipe audio from a Livewire network 
 to an instance of Icecast.
 
 * Livewire is a proprietary branch of AES69 protocol used in the broadcast industry to stream CD quality audio over a network.
