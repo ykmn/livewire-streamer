@@ -10,10 +10,10 @@ Setup
 =====
 You need a small Ubuntu VM on your Livewire network, I used 16.04, you can probably get away with 1 core if you run server edition. Suppose your current user is `axia`.
 
-* Configure multicast on your Livewire network interface. Suppose it's `ens33`:
+1. Configure multicast on your Livewire network interface. Suppose it's `ens33`:
 `sudo ifconfig ens33 multicast`
 
-* Don't forget to add route of multicast traffic to your Livewire interface if you have more than one network interface:
+2. Don't forget to add route of multicast traffic to your Livewire interface if you have more than one network interface:
 `sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33` or add route to `/etc/network/interfaces`:
 `auto ens33
 iface ens33 inet static
@@ -24,21 +24,21 @@ iface ens33 inet static
         up route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33`
 and restart interface: `sudo ifdown ens33 && ifup ens33`
 
-* Do Linux Update: `sudo apt update && sudo apt upgrade -y`
+3. Do Linux Update: `sudo apt update && sudo apt upgrade -y`
 
-* Install AVconv, dumpRTP and ezStream: `sudo apt install -y libav-tools ezstream dvbstream`
+4. Install AVconv, dumpRTP and ezStream: `sudo apt install -y libav-tools ezstream dvbstream`
 - `libav-tools` for avconv utility, make sure it's installed with MP3 support
 - `ezstream` for streaming to icecast
 - `dvbstream` for the dumptrp utility
 
-* Copy `stream.sh` and `stream-restart.sh` to user's home folder: `/home/axia/`
+5. Copy `stream.sh` and `stream-restart.sh` to user's home folder: `/home/axia/`
 - Set permissions for www-data: `sudo chown www-data:www-data /home/axia/stream*.sh && sudo chmod +x /home/axia/stream*.sh`
 
-* Edit `ezstream.xml` for your Icecast connecting.
+6. Edit `ezstream.xml` for your Icecast connecting.
 - Copy `ezstream.xml` to `/home/axia/`
 - Permissions for `ezstream.xml` are axia:axia and 644.
 
-* Create `stream` service for systemd:
+7. Create `stream` service for systemd:
 - put `stream.service` to `/etc/systemd/system/`
 - `sudo chmod 644 /etc/systemd/system/stream.service`
 - `sudo chown root:root /etc/systemd/system/stream.service`
@@ -50,14 +50,14 @@ and restart interface: `sudo ifdown ens33 && ifup ens33`
 - Edit service configuration: `sudo systemctl edit --full stream`
 Notice that service is running from `www-data` user (User=www-data).
 
-* Install Apache2 and PHP: `sudo apt install -y apache2 php`
+8. Install Apache2 and PHP: `sudo apt install -y apache2 php`
 
-* Edit `axia.php`:
+9. Edit `axia.php`:
 - find string `<a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>` and replace address of stream accordingly `ezstream.xml` settings
 
-* Copy `axia.php` to /var/www/html
+10. Copy `axia.php` to /var/www/html
 
-* Open http://your-ubuntu-host/axia.php in browser, input Livewire channel, click "Write config to File" and click PLAY link.
+11. Open http://your-ubuntu-host/axia.php in browser, input Livewire channel, click "Write config to File" and click PLAY link.
 
 Configuration
 =============
