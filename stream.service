@@ -1,0 +1,13 @@
+# Service file at /etc/systemd/system/stream.service
+[Unit]
+Description=Ezstream Service
+
+[Service]
+Type=simple
+User=www-data
+ExecStart=/bin/sh -c '/home/axia/stream.sh'
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
