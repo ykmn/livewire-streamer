@@ -1,5 +1,5 @@
 <ezstream>
-    <url>http://ICECAST.ADDRESS.GOES.HERE:8000/stream</url>
+    <url>http://YOUR-ICECAST-SERVER:8000/axia</url>
     
     <sourcepassword>hackme</sourcepassword>
     <format>MP3</format>
@@ -8,8 +8,8 @@
 
     <svrinfoname>Awesome Stream Name</svrinfoname>
     <svrinfourl>http://awesomestream.org</svrinfourl>
-    <svrinfogenre>All</svrinfogenre>
-    <svrinfodescription>This is my amazing web stream!</svrinfodescription>
+    <svrinfogenre>Any</svrinfogenre>
+    <svrinfodescription>This is my web stream straight from Livewire!</svrinfodescription>
 
     <!--
       Prohibit the server to advertise the stream on a public YP directory:
