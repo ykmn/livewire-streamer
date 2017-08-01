@@ -3,26 +3,61 @@ livewire-streamer
 This is a simple Ubuntu upstart script that runs some utilities to pipe audio from a Livewire network 
 to an instance of Icecast.
 
-* Livewire is a protocol used in the broadcast industry to stream CD quality audio over a network.
+* Livewire is a proprietary branch of AES69 protocol used in the broadcast industry to stream CD quality audio over a network.
 
 
 Setup
 =====
-* Small Ubuntu VM on your Livewire network, I used 14.04, you can prolly get away with 1 core if you run server edition
-* `> apt-get install libav-tools ezstream dvbstream`
- * `libav-tools` for avconv utility, make sure it's installed with MP3 support
- * `ezstream` for streaming to icecast
- * `dvbstream` for the dumptrp utility
+You need a small Ubuntu VM on your Livewire network, I used 16.04, you can probably get away with 1 core if you run server edition. Suppose your current user is `axia`.
 
+* Configure multicast on your Livewire network interface. Suppose it's `ens33`:
+`sudo ifconfig ens33 multicast`
 
-1. Use ftp://ftp.zephyr.com/pub/Axia/Tools/sdpgen.htm to get the multicast IP for your channel number
- * The line "c=IN IP4 239.192.0.203" has the ip you need
-2. Edit stream.conf with your specific conversion/ip details
-3. Edit ezstream.xml with your icecast details
-4. Copy stream.conf to /etc/init/
-5. `> start stream`
-6. ???
-7. Profit!
+* Don't forget to add route of multicast traffic to your Livewire interface if you have more than one network interface:
+`sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33` or add route to `/etc/network/interfaces`:
+`auto ens33
+iface ens33 inet static
+        address 172.22.0.100
+        netmask 255.255.0.0
+        network 172.22.0.0
+        broadcast 172.22.255.255
+        up route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33`
+and restart interface: `sudo ifdown ens33 && ifup ens33`
+
+* Do Linux Update: `sudo apt update && sudo apt upgrade -y`
+
+* Install AVconv, dumpRTP and ezStream: `sudo apt install -y libav-tools ezstream dvbstream`
+- `libav-tools` for avconv utility, make sure it's installed with MP3 support
+- `ezstream` for streaming to icecast
+- `dvbstream` for the dumptrp utility
+
+* Copy `stream.sh` and `stream-restart.sh` to user's home folder: `/home/axia/`
+- Set permissions for www-data: `sudo chown www-data:www-data /home/axia/stream*.sh && sudo chmod +x /home/axia/stream*.sh`
+
+* Edit `ezstream.xml` for your Icecast connecting.
+- Copy `ezstream.xml` to `/home/axia/`
+- Permissions for `ezstream.xml` are axia:axia and 644.
+
+* Create `stream` service for systemd:
+- put `stream.service` to `/etc/systemd/system/`
+- `sudo chmod 644 /etc/systemd/system/stream.service`
+- `sudo chown root:root /etc/systemd/system/stream.service`
+
+#### Service management:
+- Reload systemd: `sudo systemctl daemon-reload`
+- Enable and start service: `sudo systemctl enable stream && sudo systemctl start stream`
+- Check service status: `sudo systemctl status stream` or `sudo journalctl -u stream`
+- Edit service configuration: `sudo systemctl edit --full stream`
+Notice that service is running from `www-data` user (User=www-data).
+
+* Install Apache2 and PHP: `sudo apt install -y apache2 php`
+
+* Edit `axia.php`:
+- find string `<a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>` and replace address of stream accordingly `ezstream.xml` settings
+
+* Copy `axia.php` to /var/www/html
+
+* Open http://your-ubuntu-host/axia.php in browser, input Livewire channel, click "Write config to File" and click PLAY link.
 
 Configuration
 =============
@@ -33,4 +68,4 @@ Configuration
 
 Troubleshooting
 ===============
-* If the stream upstart job doesn't stay running check /var/log/upstart/stream for errors
+- Check service status: `sudo systemctl status stream` or `sudo journalctl -u stream`
