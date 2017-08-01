@@ -53,7 +53,11 @@ Notice that service is running from `www-data` user (User=www-data).
 8. Install Apache2 and PHP: `sudo apt install -y apache2 php`
 
 9. Edit `axia.php`:
-- find string `<a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>` and replace address of stream accordingly `ezstream.xml` settings
+- find strings `
+<audio controls>
+<source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
+<a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>`
+and replace address of stream accordingly `ezstream.xml` settings
 
 10. Copy `axia.php` to /var/www/html
 

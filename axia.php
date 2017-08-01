@@ -103,9 +103,14 @@ Document-Root: <samp><?php echo $_SERVER['DOCUMENT_ROOT']; ?></samp>
 </p>
 
 
+<audio controls>
+<source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
 <p><a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>
+</audio>
+
 <p></p>
-<p><a href="ftp://ftp.zephyr.com/pub/Axia/Tools/sdpgen.htm">SDPgen.htm</a> // <a href="https://github.com/ykmn/livewire-streamer">Livewire streamer</a></p>
+<p><a href="ftp://ftp.zephyr.com/pub/Axia/Tools/sdpgen.htm">SDPgen.htm</a> //
+<a href="https://github.com/NeilBetham/livewire-streamer">original Livewire streamer</a></p>
 
 <?php
 //if(isset($_POST['field1']) && isset($_POST['field2'])) {
