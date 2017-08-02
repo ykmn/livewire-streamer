@@ -2,6 +2,27 @@
 <head>
 <meta charset="utf-8">
 <title>Axia player and SDP generator</title>
+<style>
+body {
+	margin-left: 50px;
+	margin-right: 25px;
+	background: #e0e3e7;
+	width:80%;
+	margin:0px auto;
+	background-attachment: fixed;
+}
+body, td {
+	font-family: Cuprum, "Segoe UI", tahoma;
+	font-size: 14px;
+}
+input {
+	font-family: Cuprum, "Segoe UI", tahoma;
+	font-size: 14px;
+	color: #000;
+	background: #ccc;
+}
+
+</style>
 <script type='text/javascript' src='//code.jquery.com/jquery-1.10.1.js'></script>
 <script type="text/javascript">
 
@@ -71,9 +92,9 @@ function updsdp() {
 
 
 <body onload="updsdp()">
-<p><b>Axia Livewire SDP Generator version 1.1</b></p>
+<p><b>Axia Livewire SDP Generator version 1.1 and Livewire Player</b></p>
 
-<form action="axia.php" method='post'>
+<form action="index.php" method='post'>
 <table>
 <tr>
     <td>Source node IP address:</td>
@@ -85,28 +106,31 @@ function updsdp() {
 </tr>
 <tr>
     <td>Config file for livewire-streamer:</td>
-    <td><textarea cols="60" rows="16" readonly="readonly" name= "textblock" id="textblock">test</textarea></td>
+    <td><textarea cols="40" rows="5" readonly="readonly" name= "textblock" id="textblock">test</textarea></td>
+</tr>
+<tr>
+    <td><button id="button1" type="submit">Write config to File</button></td>
+    <td><audio controls>
+    <source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
+    <p><a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>
+    </audio>
+</td>
 </tr>
 <tr>
     <td>SDP:</td>
     <td><div id="txtsdp"></div></td>
 </tr>
 </table>
-<button id="button1" type="submit">Write config to File</button>
 </form>
-
-
 
 <p class="text">
 Server-Name: <samp><?php echo $_SERVER['SERVER_NAME']; ?></samp><br />
-Document-Root: <samp><?php echo $_SERVER['DOCUMENT_ROOT']; ?></samp>
+Document-Root: <samp><?php echo $_SERVER['DOCUMENT_ROOT']; ?></samp><br />
+Expect 4...5 seconds delay of Icecast processing.<br /><br />
+Enter Livewire channel number and press "Write config" button to save new service configuration and restart
+stream service.
 </p>
 
-
-<audio controls>
-<source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
-<p><a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>
-</audio>
 
 <p></p>
 <p><a href="ftp://ftp.zephyr.com/pub/Axia/Tools/sdpgen.htm">SDPgen.htm</a> //

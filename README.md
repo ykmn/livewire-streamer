@@ -52,16 +52,16 @@ Notice that service is running from `www-data` user (User=www-data).
 
 8. Install Apache2 and PHP: `sudo apt install -y apache2 php`
 
-9. Edit `axia.php`:
+9. Edit `index.php`:
 - find strings `
 <audio controls>
 <source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
 <a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>`
 and replace address of stream accordingly `ezstream.xml` settings
 
-10. Copy `axia.php` to /var/www/html
+10. Copy `index.php` to /var/www/html
 
-11. Open http://your-ubuntu-host/axia.php in browser, input Livewire channel, click "Write config to File" and click PLAY link.
+11. Open http://your-ubuntu-host/index.php in browser, input Livewire channel, click "Write config to File" and click PLAY link.
 
 Configuration
 =============
