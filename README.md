@@ -54,9 +54,9 @@ Notice that service is running from `www-data` user (User=www-data).
 
 9. Edit `index.php`:
 - find strings `
-<audio controls>
-<source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg">
-<a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia">PLAY</a>`
+&lt;audio controls&gt;
+&lt;source src="http://YOUR-ICECAST-SERVER:8000/axia" type="audio/mpeg"&gt;
+&lt;a target="_blank" href="http://YOUR-ICECAST-SERVER:8000/axia"&gt;PLAY&lt;/a&gt;`
 and replace address of stream accordingly `ezstream.xml` settings
 
 10. Copy `index.php` to /var/www/html
