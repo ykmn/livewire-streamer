@@ -95,10 +95,22 @@ function updsdp() {
 <p><b>Axia Livewire SDP Generator version 1.1 and Livewire Player</b></p>
 
 <form action="index.php" method='post'>
-<table>
+<table cellpadding="5">
 <tr>
     <td>Source node IP address:</td>
     <td><input id="tsrcnode" type="text" value="172.22.0.78" onkeyup="updsdp()" onchange="updsdp()" /></td>
+    <td rowspan="5" valign="top" align="left" padding="20">Channel favorites:<p>
+    <a href="#" title="9010" onClick="updateValue(this.title, event)">9010</a> ZIP One<br>
+    <a href="#" title="9018" onClick="updateValue(this.title, event)">9018</a> Comrex Access<p>
+    <a href="#" title="4301" onClick="updateValue(this.title, event)">4301</a> Studio 4 VMode1<br>
+    <a href="#" title="10003" onClick="updateValue(this.title, event)">10003</a> Retro FM Tuner Control<p>
+    <script>
+    function updateValue(val, event) {
+    	document.getElementById("tchan").value = val;
+    	event.preventDefault();
+    }
+</script>
+</td>
 </tr>
 <tr>
     <td>Livewire channel number:</td>
