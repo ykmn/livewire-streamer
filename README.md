@@ -15,13 +15,13 @@ You need a small Ubuntu VM on your Livewire network, I used 16.04, you can proba
 
 2. Don't forget to add route of multicast traffic to your Livewire interface if you have more than one network interface:
 `sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33` or add route to `/etc/network/interfaces`:
-`auto ens33
-iface ens33 inet static
-        address 172.22.0.100
-        netmask 255.255.0.0
-        network 172.22.0.0
-        broadcast 172.22.255.255
-        up route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33`
+`auto ens33`
+`iface ens33 inet static`
+`        address 172.22.0.100`
+`        netmask 255.255.0.0`
+`        network 172.22.0.0`
+`        broadcast 172.22.255.255`
+`        up route add -net 224.0.0.0 netmask 240.0.0.0 dev ens33`
 and restart interface: `sudo ifdown ens33 && ifup ens33`
 
 3. Do Linux Update: `sudo apt update && sudo apt upgrade -y`
