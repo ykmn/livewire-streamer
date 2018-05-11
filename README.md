@@ -66,6 +66,10 @@ Configuration
   * `-f mp3` Change that to the format you want to stream / output, Check avconv -formats for output codecs
   * `-b:a 320K` Change 320K to the bit rate you want to stream
 
+Preview
+=============
+![Web page preview](index.png)
+
 Troubleshooting
 ===============
 - Check service status: `sudo systemctl status stream` or `sudo journalctl -u stream`
